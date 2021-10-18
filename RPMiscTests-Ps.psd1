@@ -30,7 +30,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) David Porcher. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'A small module consisting of various test cmdlets'
+Description = 'A small module consisting of various test-cmdlets'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''
