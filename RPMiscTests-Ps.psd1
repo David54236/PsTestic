@@ -30,7 +30,7 @@ CompanyName = 'Unknown'
 Copyright = '(c) David Porcher. All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'A small module consisting of various test cmdlets'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -69,7 +69,7 @@ Copyright = '(c) David Porcher. All rights reserved.'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = '*'
+FunctionsToExport = '*-*'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'
@@ -129,5 +129,4 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
-
 
