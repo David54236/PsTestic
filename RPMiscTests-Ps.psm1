@@ -1,12 +1,10 @@
-# Implement your module commands in this script.
-
 ### System tests
 #################################
 Function Test-PSSessionIsElevated
 {
     <#
     .SYNOPSIS
-        Checks if this session is elevated
+        Checks if a session is elevated
 
     .NOTES
         Name: Test-PSSessionIsElevated
@@ -16,6 +14,7 @@ Function Test-PSSessionIsElevated
 
     .EXAMPLE
         Test-PSSessionIsElevated
+        Test-PSSessionIsElevated -WindowsPrincipal
     #>
 
     [CmdletBinding()]
@@ -30,7 +29,7 @@ Function Test-PSSessionIsElevated
     )
 
     BEGIN {
-        [string] $builtInAdminRoleName = "Administrator"
+        [string] $builtInAdminRoleName = "Administrator";
     }
 
     PROCESS {
@@ -75,7 +74,7 @@ Function Test-CommandExists
     )
 
     BEGIN {
-        [string] $errorAction = "stop"
+        [string] $errorAction = "stop";
     }
 
     PROCESS {
@@ -118,7 +117,7 @@ Function Test-NetAdapterIsUp
     param()
 
     BEGIN {
-        [string] $statusUp = "Up"
+        [string] $statusUp = "Up";
     }
 
     PROCESS {
@@ -155,7 +154,7 @@ Function Test-NetIsMetered
     param()
 
     BEGIN {
-        [string] $networkCostTypeUnrestricted = "Unrestricted"
+        [string] $networkCostTypeUnrestricted = "Unrestricted";
     }
 
     PROCESS
