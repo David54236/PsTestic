@@ -1,7 +1,6 @@
 ### System tests
 #################################
-Function Test-PSSessionIsElevated
-{
+Function Test-PSSessionIsElevated {
     <#
     .SYNOPSIS
         Checks if a session is elevated
@@ -24,7 +23,7 @@ Function Test-PSSessionIsElevated
             ValueFromPipeline = $false,
             ValueFromPipelineByPropertyName = $false,
             Position = 0
-            )]
+        )]
         [Security.Principal.WindowsPrincipal] $WindowsPrincipal = [Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
     )
 
@@ -33,20 +32,17 @@ Function Test-PSSessionIsElevated
     }
 
     PROCESS {
-        if($WindowsPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole] $builtInAdminRoleName))
-        {
+        if ($WindowsPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole] $builtInAdminRoleName)) {
             return $true;
         }
-        else
-        {
+        else {
             return $false;
         }
     }
 
     END {}
 }
-Function Test-CommandExists
-{
+Function Test-CommandExists {
     <#
     .SYNOPSIS
         Checks if the maschine can run the given command
@@ -69,7 +65,7 @@ Function Test-CommandExists
             ValueFromPipeline = $false,
             ValueFromPipelineByPropertyName = $false,
             Position = 0
-            )]
+        )]
         [string] $command
     )
 
@@ -78,15 +74,12 @@ Function Test-CommandExists
     }
 
     PROCESS {
-        try
-        {
-            if(Get-Command $command -ErrorAction $errorAction)
-            {
+        try {
+            if (Get-Command $command -ErrorAction $errorAction) {
                 return $true;
             }
         }
-        Catch
-        {
+        Catch {
             return $false;
         }
     }
@@ -96,8 +89,7 @@ Function Test-CommandExists
 
 ### Network tests
 #################################
-Function Test-NetAdapterIsUp
-{
+Function Test-NetAdapterIsUp {
     <#
     .SYNOPSIS
         Checks if at least one Network Adapter is connected to a network
@@ -121,10 +113,8 @@ Function Test-NetAdapterIsUp
     }
 
     PROCESS {
-        foreach($adapter in Get-NetAdapter)
-        {
-            if($adapter.status -eq $statusUp)
-            {
+        foreach ($adapter in Get-NetAdapter) {
+            if ($adapter.status -eq $statusUp) {
                 return $true;
             }
         }
@@ -133,8 +123,7 @@ Function Test-NetAdapterIsUp
 
     END {}
 }
-Function Test-NetIsMetered
-{
+Function Test-NetIsMetered {
     <#
     .SYNOPSIS
         Checks if the network connection is metered
@@ -157,22 +146,18 @@ Function Test-NetIsMetered
         [string] $networkCostTypeUnrestricted = "Unrestricted";
     }
 
-    PROCESS
-    {
-        if(Test-NetAdapterIsUp)
-        {
+    PROCESS {
+        if (Test-NetAdapterIsUp) {
             [void][Windows.Networking.Connectivity.NetworkInformation, Windows, ContentType = WindowsRuntime];
             $cost = [Windows.Networking.Connectivity.NetworkInformation]::GetInternetConnectionProfile().GetConnectionCost();
             return  $cost.ApproachingDataLimit -or
-                    $cost.OverDataLimit -or
-                    $cost.Roaming -or
-                    $cost.BackgroundDataUsageRestricted -or
-                    ($cost.NetworkCostType -ne $networkCostTypeUnrestricted);
+            $cost.OverDataLimit -or
+            $cost.Roaming -or
+            $cost.BackgroundDataUsageRestricted -or
+            ($cost.NetworkCostType -ne $networkCostTypeUnrestricted);
         }
         return $false;
     }
 
     END {}
 }
-
-Export-ModuleMember -Function *-*
