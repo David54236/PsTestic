@@ -144,6 +144,7 @@ Function Test-NetIsMetered {
 
     BEGIN {
         [string] $networkCostTypeUnrestricted = "Unrestricted";
+        [string] $networkCostTypeUnknown = "Unknown"; # Default value in Windows Server 2016
     }
 
     PROCESS {
@@ -154,7 +155,9 @@ Function Test-NetIsMetered {
             $cost.OverDataLimit -or
             $cost.Roaming -or
             $cost.BackgroundDataUsageRestricted -or
-            ($cost.NetworkCostType -ne $networkCostTypeUnrestricted);
+            (($cost.NetworkCostType -ne $networkCostTypeUnrestricted) -and
+             ($cost.NetworkCostType -ne $networkCostTypeUnknown)
+            );
         }
         return $false;
     }
